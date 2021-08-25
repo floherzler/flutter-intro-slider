@@ -636,19 +636,16 @@ class IntroSliderState extends State<IntroSlider>
     if (tabController.index + 1 == lengthSlide) {
       return Container(width: MediaQuery.of(context).size.width / 4);
     } else {
-      return SizedBox(
-          width: 300,
-          height: 40,
-          child: TextButton(
-            onPressed: onSkipPress as void Function(),
-            style: TextButton.styleFrom(
-              backgroundColor: colorSkipBtn,
-              primary: highlightColorSkipBtn,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(borderRadiusSkipBtn)),
-            ),
-            child: renderSkipBtn,
-          ));
+      return TextButton(
+        onPressed: onSkipPress as void Function(),
+        style: TextButton.styleFrom(
+          backgroundColor: colorSkipBtn,
+          primary: highlightColorSkipBtn,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadiusSkipBtn)),
+        ),
+        child: renderSkipBtn,
+      );
     }
   }
 
@@ -704,7 +701,10 @@ class IntroSliderState extends State<IntroSlider>
   }
 
   Widget renderBottom() {
-    return Container(
+    return Positioned(
+      bottom: 10.0,
+      left: 10.0,
+      right: 10.0,
       height: MediaQuery.of(context).size.height * 0.15,
       child: stackBottomVertical
           ? Column(
@@ -750,7 +750,22 @@ class IntroSliderState extends State<IntroSlider>
                 ),
                 bigButtons
                     ? (this.currentTabIndex == (widget.slides!.length - 1)
-                        ? Container(
+                        ? // Next / Done Button
+                        Container(
+                            alignment: Alignment.center,
+                            width: bigButtons
+                                ? MediaQuery.of(context).size.width / 1
+                                : MediaQuery.of(context).size.width / 4,
+                            child: tabController.index + 1 == lengthSlide
+                                ? showDoneBtn
+                                    ? buildDoneButton()
+                                    : Container()
+                                : showNextBtn
+                                    ? buildNextButton()
+                                    : Container(),
+                          )
+                        : // Prev / Skip Button
+                        Container(
                             alignment: Alignment.center,
                             width: bigButtons
                                 ? MediaQuery.of(context).size.width / 1
@@ -760,20 +775,6 @@ class IntroSliderState extends State<IntroSlider>
                                 : (showPrevBtn
                                     ? buildPrevButton()
                                     : Container()),
-                          )
-                        : Container(
-                            alignment: Alignment.center,
-                            width: bigButtons
-                                ? MediaQuery.of(context).size.width / 1
-                                : MediaQuery.of(context).size.width / 4,
-                            height: 40,
-                            child: tabController.index + 1 == lengthSlide
-                                ? showDoneBtn
-                                    ? buildDoneButton()
-                                    : Container()
-                                : showNextBtn
-                                    ? buildNextButton()
-                                    : Container(),
                           ))
                     :
                     // Buttons
