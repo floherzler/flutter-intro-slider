@@ -636,29 +636,39 @@ class IntroSliderState extends State<IntroSlider>
     if (tabController.index + 1 == lengthSlide) {
       return Container(width: MediaQuery.of(context).size.width / 4);
     } else {
-      return TextButton(
-        onPressed: onSkipPress as void Function(),
-        style: TextButton.styleFrom(
-          backgroundColor: colorSkipBtn,
-          primary: highlightColorSkipBtn,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadiusSkipBtn)),
+      return Container(
+        width: bigButtons
+            ? MediaQuery.of(context).size.width
+            : MediaQuery.of(context).size.width / 4,
+        child: TextButton(
+          onPressed: onSkipPress as void Function(),
+          style: TextButton.styleFrom(
+            backgroundColor: colorSkipBtn,
+            primary: highlightColorSkipBtn,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(borderRadiusSkipBtn)),
+          ),
+          child: renderSkipBtn,
         ),
-        child: renderSkipBtn,
       );
     }
   }
 
   Widget buildDoneButton() {
-    return TextButton(
-      onPressed: onDonePress as void Function()?,
-      style: TextButton.styleFrom(
-        backgroundColor: colorDoneBtn,
-        primary: highlightColorDoneBtn,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadiusDoneBtn)),
+    return Container(
+      width: bigButtons
+          ? MediaQuery.of(context).size.width
+          : MediaQuery.of(context).size.width / 4,
+      child: TextButton(
+        onPressed: onDonePress as void Function()?,
+        style: TextButton.styleFrom(
+          backgroundColor: colorDoneBtn,
+          primary: highlightColorDoneBtn,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadiusDoneBtn)),
+        ),
+        child: renderDoneBtn,
       ),
-      child: renderDoneBtn,
     );
   }
 
