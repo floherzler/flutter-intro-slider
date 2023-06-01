@@ -609,7 +609,7 @@ class IntroSliderState extends State<IntroSlider>
   Widget build(BuildContext context) {
     // Full screen view
     if (widget.hideStatusBar == true) {
-      SystemChrome.setEnabledSystemUIMode([]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     }
 
     return Scaffold(
